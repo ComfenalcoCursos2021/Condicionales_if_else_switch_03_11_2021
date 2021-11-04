@@ -1,8 +1,9 @@
 <?php
     header("Content-Type: application/json");
     header('Access-Control-Allow-Origin: *');
-    extract(json_decode(file_get_contents("php://input"), true));
-
+    
+    extract((file_get_contents("php://input")) ? json_decode(file_get_contents("php://input"), true) : ["numero"]);
+    $numero = (integer) 0;
     switch ($numero) {
         case 3: case 2: case 1:
             print_r("Hola soy el un numero valido");
@@ -24,42 +25,42 @@
 
 
 
-    if($numero >= 1 && $numero <= 5){
-        if($numero==3){
-            print_r(<<<MENSAJE
-                El numero enviado cumple la condicion :)
-            MENSAJE);
-        }
-    }else if($numero>=20){
-        print_r(<<<MENSAJE
-        El numero enviado cumple la condicion es mayor a 20
-    MENSAJE);
-    }else if($numero==10){
-        print_r(<<<MENSAJE
-        El numero enviado cumple la condicion y es igual a 10
-    MENSAJE);
-    }else{
-        print_r(<<<MENSAJE
-            El numero enviado no cumple la condicion :(
-        MENSAJE);
-    }
+    // if($numero >= 1 && $numero <= 5){
+    //     if($numero==3){
+    //         print_r(<<<MENSAJE
+    //             El numero enviado cumple la condicion :)
+    //         MENSAJE);
+    //     }
+    // }else if($numero>=20){
+    //     print_r(<<<MENSAJE
+    //     El numero enviado cumple la condicion es mayor a 20
+    // MENSAJE);
+    // }else if($numero==10){
+    //     print_r(<<<MENSAJE
+    //     El numero enviado cumple la condicion y es igual a 10
+    // MENSAJE);
+    // }else{
+    //     print_r(<<<MENSAJE
+    //         El numero enviado no cumple la condicion :(
+    //     MENSAJE);
+    // }
 
 
 
-    // $MensajeIF = function() use($numero){
-    //     return <<<MENSAJE
-    //         El numero enviado cumple la condicion :) :p $numero
-    //     MENSAJE;
-    // };
-    // $RESPUESTA = (string) 
-    // ($numero >= 1 && $numero <= 5) ?
-    //     ($numero==3) ? $MensajeIF() : null
-    //     :(($numero>=20) ? "El numero enviado cumple la condicion es mayor a 20"
-    //     :(($numero==10) ? "El numero enviado cumple la condicion y es igual a 10"
-    //         :"El numero enviado no cumple la condicion :("
-    //     )
-    // );
-    // print_r($RESPUESTA);
+    $MensajeIF = function() use($numero){
+        return <<<MENSAJE
+            El numero enviado cumple la condicion :) :p $numero
+MENSAJE;
+    };
+    $RESPUESTA = (string) 
+    ($numero >= 1 && $numero <= 5) ?
+        ($numero==3) ? $MensajeIF() : null
+        :(($numero>=20) ? "El numero enviado cumple la condicion es mayor a 20"
+        :(($numero==10) ? "El numero enviado cumple la condicion y es igual a 10"
+            :"El numero enviado no cumple la condicion :("
+        )
+    );
+    print_r($RESPUESTA);
     
     // print_r(
     //     (false) ? "Hola soy la condicion correcta" 
